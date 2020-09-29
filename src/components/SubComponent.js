@@ -1,19 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import CodeCommenting from "./Content/CodeCommenting";
-const drawerWidth = 370;
+import ScreenOptimization from "./Content/ScreenOptimization";
+const drawerWidth = 350;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,18 +32,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SubComponent(props) {
   const classes = useStyles();
-
+  const { panelName } = props;
   return (
     <div className={classes.root}>
       <main className={classes.content}>
-        props.panelName === "CodeCommenting" ?
-        <CodeCommenting />
-        : props.panelName === "CodeCommenting"
-        <CodeCommenting />
-        : panelName === "codeTestDriven" ?
-        <CodeCommenting />
-        :
-        <CodeCommenting />
+        {panelName === 0 ? (
+          <CodeCommenting />
+        ) : panelName === 6 ? (
+          <ScreenOptimization />
+        ) : (
+          <p>hey2</p>
+        )}
       </main>
       <Drawer
         className={classes.drawer}

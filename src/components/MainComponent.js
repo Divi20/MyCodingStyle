@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -13,14 +12,15 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import SubComponent from "./SubComponent";
 
-const drawerWidth = 200;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
+    width: `calc(100% - ${drawerWidth}px)`
   },
   appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
+    //width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth
   },
   drawer: {
@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    top: "64px"
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -41,16 +42,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainComponent() {
   const classes = useStyles();
-  const [panelName, setPanelName] = useState("CodeComponent");
-  useEffect(() => {
-    console.log(panelName);
-  }, [panelName]);
+  const [panelName, setPanelName] = useState(0);
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            Permanent drawer
+            Coding Style
           </Typography>
         </Toolbar>
       </AppBar>
@@ -62,15 +61,24 @@ export default function MainComponent() {
         }}
         anchor="left"
       >
-        <div className={classes.toolbar} />
-        <Divider />
         <List>
-          {["CodeCommenting"].map((text, index) => (
-            <ListItem button key={text} onClick={() => setPanelName(text)}>
+          {[
+            "Naming Conventions",
+            "Code Documentation",
+            "Code Commenting",
+            "Reusable Code",
+            "Code Formatting",
+            "Code Testing",
+            "Screen Optimization"
+          ].map((text, index) => (
+            <ListItem button key={text}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText
+                primary={text}
+                onClick={() => setPanelName(index)}
+              />
             </ListItem>
           ))}
         </List>
